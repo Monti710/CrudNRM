@@ -1,0 +1,31 @@
+{
+  "name": "crudnrm",
+  "version": "1.0.0",
+  "description": "In this project use the framework Node for backend, also use framework React for fronted and for data base I use MongoDB",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsmaelMontielHome/CrudNRM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IsmaelMontielHome/CrudNRM/issues"
+  },
+  "homepage": "https://github.com/IsmaelMontielHome/CrudNRM#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
