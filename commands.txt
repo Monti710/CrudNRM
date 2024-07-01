@@ -57,3 +57,20 @@ npm i bcryptjs for encrypted passwords
 npm i jsonwebtoken for generate token
 
 npm i cookie-parser middelware for conver the datas of cookies in objects json 
+
+monti@monti:~/Desktop/InHome/CrudNRM$ npm create vite
+✔ Project name: … CRUD
+✔ Package name: … crud
+✔ Select a framework: › React
+✔ Select a variant: › JavaScript
+
+Scaffolding project in /home/monti/Desktop/InHome/CrudNRM/CRUD...
+
+Done. Now run:
+
+  cd CRUD
+  npm install
+  npm run dev
+
+ npm install react-hook-form
+npm i axios
