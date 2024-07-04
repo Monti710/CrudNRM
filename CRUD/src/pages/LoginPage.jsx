@@ -1,7 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
 import { Link } from "react-router-dom";
-
 import { useAuth } from "../context/AuthContext"; // Verifica que este import sea correcto
 
 function LoginPage() {
