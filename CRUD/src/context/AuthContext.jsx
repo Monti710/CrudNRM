@@ -27,6 +27,11 @@ export const AuthProvider = ({ children }) => {
         }
     }, [errors]);
 
+    const checkToken = () => {
+        const token = Cookies.get("token");
+        return !!token; // Retorna true si existe el token, false si no
+    };
+
     // Verificar token al cargar el componente
     useEffect(() => {
         async function checkLogin() {
@@ -83,15 +88,25 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const logout = () => {
+            Cookies.remove("token");
+            setUser(null);
+            setIsAuthenticated(false);
+            setErrors([]);
+    };
+
     return (
         <AuthContext.Provider
             value={{
+                checkToken,
                 user,
                 signup,
                 signin,
+                logout,
                 loading,
                 isAuthenticated,
-                errors
+                errors,
+                
             }}
         >
             {children}

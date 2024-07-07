@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from "./context/AuthContext";
-import { Navigate, Outlet } from "react-router-dom";
-import './css/LoadingAnimation.css'; // Asumimos que crearemos este archivo
+import { useNavigate, Outlet, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+import './css/LoadingAnimation.css';
 
 const LoadingAnimation = () => {
     return (
@@ -17,22 +17,30 @@ const LoadingAnimation = () => {
 };
 
 const ProtectedRoute = () => {
-    const { loading, isAuthenticated } = useAuth();
+    const { isAuthenticated, checkToken, logout } = useAuth();
+    const navigate = useNavigate();
     const [showLoading, setShowLoading] = useState(true);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowLoading(false);
-        }, 3000); // Muestra la animación de carga por 3 segundos
+        }, 3000);
 
-        return () => clearTimeout(timer); // Limpia el temporizador cuando el componente se desmonta
+        return () => clearTimeout(timer);
     }, []);
+
+    useEffect(() => {
+        if (!checkToken() && isAuthenticated) {
+            logout();
+            navigate('/login');
+        }
+    }, [checkToken, isAuthenticated, logout, navigate]);
 
     if (showLoading) {
         return <LoadingAnimation />;
     }
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !checkToken()) {
         return <Navigate to="/login" replace />;
     }
 
