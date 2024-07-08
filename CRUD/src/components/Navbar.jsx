@@ -8,7 +8,9 @@ function Navbar() {
   return (
     <nav className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 shadow-lg my-3 py-4 px-6 md:px-10 rounded-lg">
       <div className="flex justify-between items-center">
-        <Link to="/">
+        <Link to={
+          isAuthenticated ? "/tasks" : "/"
+        }>
           <h1 className="text-2xl md:text-3xl font-extrabold text-white">Task Manage</h1>
         </Link>
         <ul className="flex gap-x-4">

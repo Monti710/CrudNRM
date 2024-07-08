@@ -1,18 +1,49 @@
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useTasks } from "../context/TasksContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc);
 
 function TaskFormPage() {
-  const { register, handleSubmit } = useForm();
-
-  const {createTask} = useTasks();
-
+  const { register, handleSubmit, setValue } = useForm();
+  const { createTask, getTask, updateTask } = useTasks();
   const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    async function loadTask() {
+      if (params.id) {
+        const task = await getTask(params.id);
+        setValue("title", task.title);
+        setValue("description", task.description);
+        setValue("date", dayjs(task.date).format('YYYY-MM-DD')); // Set formatted date if editing
+      }
+    }
+    loadTask();
+  }, [params.id, getTask, setValue]);
 
   const onSubmit = handleSubmit((data) => {
-    createTask(data);
-    (navigate("/tasks"))
+    // Set current date if data.date is empty or undefined
+    if (!data.date) {
+      data.date = dayjs().format();
+    }
 
+    if (params.id) {
+      updateTask(params.id, {
+        ...data,
+        date: dayjs.utc(data.date).format()
+      });
+    } else {
+      createTask({
+        ...data,
+        date: dayjs.utc(data.date).format()
+      });
+    }
+    navigate("/tasks");
   });
 
   return (
@@ -50,6 +81,16 @@ function TaskFormPage() {
                 {...register("description")}
               />
             </div>
+            <div className="flex justify-end items-center space-x-2">
+              <label className="text-black" htmlFor="date">Date</label>
+              <input
+                type="date"
+                id="date"
+                className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                {...register('date')}
+              />
+            </div>
+
             <button
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors duration-300"

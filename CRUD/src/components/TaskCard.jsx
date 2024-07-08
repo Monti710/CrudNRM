@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { HiTrash, HiPencil, HiChevronDown, HiChevronUp, HiCalendar } from 'react-icons/hi';
 import { useTasks } from '../context/TasksContext';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc'; // Asegúrate de importar utc desde dayjs/plugin/utc
+dayjs.extend(utc);
 
 function TaskCard({ task }) {
-    const formattedDate = new Date(Number(task.date)).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const [expanded, setExpanded] = useState(false);
     const { deleteTask } = useTasks();
 
@@ -21,7 +23,6 @@ function TaskCard({ task }) {
                         deleteTask(task._id);
                     }}
                     title='Delete'
-                    
                 >
                     <HiTrash className="w-5 h-5" />
                 </button>
@@ -57,7 +58,7 @@ function TaskCard({ task }) {
             )}
             <div className="mt-auto">
                 <p className="text-xs text-gray-500 flex items-center">
-                    <HiCalendar className="mr-1" /> {formattedDate}
+                    <HiCalendar className="mr-1" /> {dayjs.utc(task.date).format('DD/MM/YYYY')}
                 </p>
             </div>
         </div>
