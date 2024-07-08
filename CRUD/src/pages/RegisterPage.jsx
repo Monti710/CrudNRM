@@ -20,7 +20,7 @@ function RegisterPage() {
         <div className='relative flex flex-col md:flex-row justify-center items-center min-h-screen bg-black p-4'>
             <div className="absolute inset-0 z-0">
                 <img
-                    src="https://i.pinimg.com/originals/8c/ec/78/8cec78529ca4eed590289694f17a2acb.jpg"
+                    src="https://th.bing.com/th/id/OIP.Gzl6K4caN-6vOjOLPZC7rgHaDd?rs=1&pid=ImgDetMain"
                     className='absolute inset-0 w-full h-full object-cover blur-md opacity-70'
                 
                 />
@@ -33,7 +33,7 @@ function RegisterPage() {
                     <span className="block">COMPLETE IT</span>
                 </h1>
                 <img
-                    src="https://www.perfectwriters.co.uk/images/perfect-writers-home-1.webp"
+                    src="https://magazine.com.ve/wp-content/uploads/2022/06/laptop-fechas_12502.jpg"
                     className='h-64 w-64 md:h-96 md:w-96 object-cover rounded-full shadow-lg'
                     alt='Imagen principal'
                 />
